@@ -15,15 +15,14 @@ public class CarsController {
 
     private final CarService carService;
 
-    @Autowired
     public CarsController(CarService carService) {
         this.carService = carService;
     }
 
     @GetMapping()
-    public String index(@RequestParam(value = "count", required = false) Integer count, Model model) {
+    public String index(@RequestParam(value = "count", defaultValue = "-1") Integer count, Model model) {
 
-        model.addAttribute("carList", carService.index(count == null ? -1 : count));
+        model.addAttribute("carList", carService.index(count));
         return "cars";
     }
 }
